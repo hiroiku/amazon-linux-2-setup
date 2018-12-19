@@ -1,16 +1,17 @@
 #!/bin/sh
 
+# Requirements check
+# --------------------------------
+
 if [ ${EUID:-${UID}} != 0 ]; then
     echo "This script must be run as root"
     exit 1
 fi
 
-# System
+# Config
 # --------------------------------
-yum update -y
 
 # ELB
-# --------------------------------
 while true; do
     echo -n "Do you want to assign EBS? [y/n]: "
     read EBS_ENABLED
@@ -21,13 +22,7 @@ while true; do
     esac
 done
 
-if [ "$EBS_ENABLED" = "y" ]; then
-    SCRIPT="./scripts/elb.sh"
-    "$SCRIPT"
-fi
-
 # EFS
-# --------------------------------
 while true; do
     echo -n "Do you want to assign EFS? [y/n]: "
     read EFS_ENABLED
@@ -38,13 +33,7 @@ while true; do
     esac
 done
 
-if [ "$EFS_ENABLED" = "y" ]; then
-    SCRIPT="./scripts/efs.sh"
-    "$SCRIPT"
-fi
-
 # Swap
-# --------------------------------
 while true; do
     echo -n "Would you like to create a swapfile? [y/n]: "
     read SWAP_ENABLED
@@ -55,13 +44,7 @@ while true; do
     esac
 done
 
-if [ "$SWAP_ENABLED" = "y" ]; then
-    SCRIPT="./scripts/swap.sh"
-    "$SCRIPT"
-fi
-
 # CloudWatch
-# --------------------------------
 while true; do
     echo -n "Would you like to enable CloudWatch? [y/n]: "
     read CLOUDWATCH_ENABLED
@@ -72,13 +55,7 @@ while true; do
     esac
 done
 
-if [ "$CLOUDWATCH_ENABLED" = "y" ]; then
-    SCRIPT="./scripts/cloudwatch.sh"
-    "$SCRIPT"
-fi
-
 # PHP
-# --------------------------------
 while true; do
     echo -n "Do you want to install PHP? [y/n]: "
     read PHP_ENABLED
@@ -89,13 +66,7 @@ while true; do
     esac
 done
 
-if [ "$PHP_ENABLED" = "y" ]; then
-    SCRIPT="./scripts/php.sh"
-    "$SCRIPT"
-fi
-
 # Nginx
-# --------------------------------
 while true; do
     echo -n "Do you want to install Nginx? [y/n]: "
     read NGINX_ENABLED
@@ -106,6 +77,41 @@ while true; do
     esac
 done
 
+# Run
+# --------------------------------
+yum update -y
+
+# ELB
+if [ "$EBS_ENABLED" = "y" ]; then
+    SCRIPT="./scripts/elb.sh"
+    "$SCRIPT"
+fi
+
+# EFS
+if [ "$EFS_ENABLED" = "y" ]; then
+    SCRIPT="./scripts/efs.sh"
+    "$SCRIPT"
+fi
+
+# Swap
+if [ "$SWAP_ENABLED" = "y" ]; then
+    SCRIPT="./scripts/swap.sh"
+    "$SCRIPT"
+fi
+
+# CloudWatch
+if [ "$CLOUDWATCH_ENABLED" = "y" ]; then
+    SCRIPT="./scripts/cloudwatch.sh"
+    "$SCRIPT"
+fi
+
+# PHP
+if [ "$PHP_ENABLED" = "y" ]; then
+    SCRIPT="./scripts/php.sh"
+    "$SCRIPT"
+fi
+
+# Nginx
 if [ "$NGINX_ENABLED" = "y" ]; then
     SCRIPT="./scripts/nginx.sh"
     "$SCRIPT"
