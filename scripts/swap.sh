@@ -6,7 +6,7 @@ if [ ${EUID:-${UID}} != 0 ]; then
 fi
 
 while true; do
-    echo -n "Please input the swapfile location: "
+    echo -n "Please input the swapfile path: "
     read FILE_PATH
 
     if [ -n "$FILE_PATH" ]; then
