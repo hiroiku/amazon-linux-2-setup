@@ -37,7 +37,10 @@ else
 fi
 
 if [ \$SIZE -ne \$SWAPSIZE ]; then
-  dd if=/dev/zero of=\$SWAPFILENAME count=\$SIZE bs=1K && chmod 600 \$SWAPFILENAME && mkswap \$SWAPFILENAME && swapon \$SWAPFILENAME
+  dd if=/dev/zero of=\$SWAPFILENAME count=\$SIZE bs=1K
+  chmod 600 \$SWAPFILENAME
+  mkswap \$SWAPFILENAME
+  swapon \$SWAPFILENAME
 else
   swapon \$SWAPFILENAME
 fi
