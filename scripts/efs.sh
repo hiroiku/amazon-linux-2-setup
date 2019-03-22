@@ -27,8 +27,8 @@ done
 yum install -y amazon-efs-utils
 
 # Add fstab
-if ! grep -sq "$FILESYSTEM_ID" /etc/fstab; then
-    echo $FILESYSTEM_ID:/ $MOUNT_PATH efs defaults,_netdev 0 0 >> /etc/fstab
+if ! grep -sq "$FILESYSTEM_ID:$MOUNT_PATH" /etc/fstab; then
+    echo $FILESYSTEM_ID:$MOUNT_PATH $MOUNT_PATH efs defaults,_netdev 0 0 >> /etc/fstab
 fi
 
 # Mount
