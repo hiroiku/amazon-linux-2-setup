@@ -18,6 +18,9 @@ systemctl start nginx
 # /etc/nginx/nginx.conf
 cat < ../templates/etc/nginx/nginx.conf > /etc/nginx/nginx.conf
 
+# /etc/nginx/conf.d/_default.conf
+cp ../templates/etc/nginx/conf.d/_default.conf /etc/nginx/conf.d/_default.conf
+
 # /etc/nginx/include.d
 mkdir -p /etc/nginx/include.d
 
