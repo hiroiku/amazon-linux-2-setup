@@ -1,5 +1,12 @@
 #!/bin/sh
 
+cd `dirname $0`
+
+if [ ${EUID:-${UID}} != 0 ]; then
+    echo "This script must be run as root"
+    exit 1
+fi
+
 # Install
 cd ~
 curl -O http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.1.zip
@@ -32,5 +39,5 @@ expect {
 }
 "
 
-crontab -l; echo "*/5 * * * * /usr/local/bin/aws-scripts-mon/mon-put-instance-data.pl --from-cron --mem-util --mem-used --mem-used-incl-cache-buff --mem-avail --swap-util --swap-used --disk-path=/ --disk-space-util --disk-space-used --disk-space-avail" | crontab -u ec2-user -
+crontab -l; echo "*/5 * * * * /usr/local/bin/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-used-incl-cache-buff --mem-avail --swap-util --swap-used --disk-path=/ --disk-space-util --disk-space-used --disk-space-avail --from-cron" | crontab -u ec2-user -
 sudo -u ec2-user /usr/local/bin/aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-used-incl-cache-buff --mem-avail --swap-util --swap-used --disk-path=/ --disk-space-util --disk-space-used --disk-space-avail

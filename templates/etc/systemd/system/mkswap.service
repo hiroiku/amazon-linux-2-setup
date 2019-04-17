@@ -1,0 +1,12 @@
+[Unit]
+Description=Make swapfile and swapon on boot.
+After=local-fs.target
+RequiresMountsFor=/
+
+[Service]
+RemainAfterExit=true
+Type=oneshot
+ExecStart=/usr/local/bin/mkswap.sh
+
+[Install]
+WantedBy=local-fs.target

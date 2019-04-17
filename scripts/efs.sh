@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd `dirname $0`
+
 if [ ${EUID:-${UID}} != 0 ]; then
     echo "This script must be run as root"
     exit 1
