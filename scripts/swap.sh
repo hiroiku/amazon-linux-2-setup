@@ -26,3 +26,4 @@ cp ../templates/etc/systemd/system/mkswap.service /etc/systemd/system/mkswap.ser
 
 # Enable swap
 systemctl enable mkswap
+systemctl start mkswap
