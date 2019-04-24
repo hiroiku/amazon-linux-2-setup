@@ -12,7 +12,7 @@ cd ~
 curl -O http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-1.2.1.zip
 unzip -o CloudWatchMonitoringScripts-1.2.1.zip
 rm -fr CloudWatchMonitoringScripts-1.2.1.zip
-mv -fr aws-scripts-mon/ /usr/local/bin/
+mv -f aws-scripts-mon/ /usr/local/bin/
 
 yum install -y perl-Switch perl-DateTime perl-Sys-Syslog perl-LWP-Protocol-https perl-Digest-SHA.x86_64
 yum install -y expect
