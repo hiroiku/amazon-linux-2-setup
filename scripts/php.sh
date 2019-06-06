@@ -12,7 +12,6 @@ VERSIONS=(`amazon-linux-extras list | grep -oP "^\s+?.+\s+?\K(php\d+?\.\d+?)" | 
 LATEST=("${VERSIONS[@]:0}")
 amazon-linux-extras install -y $LATEST
 
-rm -rf /etc/php-fpm.d/*
 yum install -y php-bcmath php-common php-fpm php-gd php-intl php-json php-mbstring php-opcache php-pdo php-xml
 systemctl enable php-fpm
 systemctl start php-fpm
