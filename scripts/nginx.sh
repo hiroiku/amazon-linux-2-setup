@@ -9,7 +9,6 @@ fi
 
 # Install Nginx
 amazon-linux-extras install -y nginx1.12
-rm -rf /etc/nginx/conf.d/*
 
 # Enable nginx
 systemctl enable nginx
@@ -38,5 +37,4 @@ openssl rand 48 > /etc/ssl/ssl_session_ticket.key
 cat < ../templates/etc/nginx/include.d/ssl.conf > /etc/nginx/include.d/ssl.conf
 
 # Restart nginx
-rm -f /etc/nginx/conf.d/php-fpm.conf
 systemctl restart nginx
