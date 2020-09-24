@@ -1,0 +1,27 @@
+server {
+    listen      443 ssl http2;
+    server_name {FQDN};
+    charset     UTF-8;
+    access_log  off;
+
+    include /etc/nginx/include.d/ssl.conf;
+
+    # add_header  X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+
+    set $bucket $host;
+    set $s3_host "s3-website-ap-northeast-1.amazonaws.com";
+
+    location ~* \.(jpg|jpeg|gif|png|bmp|css|js|swf|ico|pdf|svg|eot|ttf|woff|wav|mp3|ogg|mp4|mov|wmv)$ {
+        expires 365d;
+        add_header Pragma public;
+        add_header Cache-Control "public";
+        access_log off;
+        include /etc/nginx/include.d/s3.conf;
+    }
+
+    location / {
+        auth_basic "Restricted";
+        auth_basic_user_file /etc/nginx/htpasswd.d/reverse-real;
+        include /etc/nginx/include.d/s3.conf;
+    }
+}
