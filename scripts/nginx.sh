@@ -8,7 +8,7 @@ if [ ${EUID:-${UID}} != 0 ]; then
 fi
 
 # Install Nginx
-amazon-linux-extras install -y nginx1.12
+amazon-linux-extras install -y nginx1
 
 # Enable nginx
 systemctl enable nginx
