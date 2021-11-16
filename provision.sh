@@ -31,8 +31,8 @@ done
 useradd -m -s /bin/bash $PROVISION
 sudo -u $PROVISION mkdir /home/$PROVISION/DocumentRoot
 chmod 755 /home/$PROVISION
-mkdir -p /home/$PROVISION/log/nginx
-chmod -R 755 /home/$PROVISION/log
+#mkdir -p /home/$PROVISION/log/nginx
+#chmod -R 755 /home/$PROVISION/log
 
 # Create php7.2-fpm
 # --------------------------------
